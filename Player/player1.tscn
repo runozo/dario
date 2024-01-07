@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://bffovtwiegpa8"]
+[gd_scene load_steps=14 format=3 uid="uid://bffovtwiegpa8"]
 
 [ext_resource type="Texture2D" uid="uid://cy5djgah2h7oe" path="res://assets/characters.png" id="1_jb4eu"]
 [ext_resource type="Script" path="res://Player/player1.gd" id="1_ypdqc"]
@@ -96,9 +96,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_csix5"]
-size = Vector2(16, 21)
-
 [node name="CharacterBody2D" type="CharacterBody2D"]
 collision_layer = 2
 platform_floor_layers = 4294967041
@@ -106,9 +103,9 @@ script = ExtResource("1_ypdqc")
 jump_speed = -700.0
 
 [node name="Player1Sprite" type="AnimatedSprite2D" parent="."]
+position = Vector2(0, -8)
 sprite_frames = SubResource("SpriteFrames_hwdv7")
-animation = &"jump"
+animation = &"stand"
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0.5, 5.5)
-shape = SubResource("RectangleShape2D_csix5")
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-2, -13, 1, -13, 3, -12, 5, -9, 5, -5, 5, -3, 8, -1, 8, 2, 7, 8, -7, 8, -8, 0, -3, -4, -6, -7, -6, -8)
