@@ -1,0 +1,61 @@
+[gd_scene load_steps=9 format=3 uid="uid://bh4jxnp16bcu8"]
+
+[ext_resource type="Texture2D" uid="uid://cy5djgah2h7oe" path="res://assets/characters.png" id="1_7fgw7"]
+[ext_resource type="Script" path="res://levels/phasing_platform.gd" id="1_rxw4y"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_jaxgt"]
+atlas = ExtResource("1_7fgw7")
+region = Rect2(1, 856, 18, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6x6lf"]
+atlas = ExtResource("1_7fgw7")
+region = Rect2(19, 856, 18, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6mxcr"]
+atlas = ExtResource("1_7fgw7")
+region = Rect2(37, 856, 18, 8)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6sncx"]
+atlas = ExtResource("1_7fgw7")
+region = Rect2(55, 856, 18, 8)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_olt5l"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_jaxgt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6x6lf")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6mxcr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6sncx")
+}],
+"loop": false,
+"name": &"fade_out",
+"speed": 1.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xufx4"]
+size = Vector2(20, 5)
+
+[node name="PhasingPlatform" type="Node2D"]
+script = ExtResource("1_rxw4y")
+
+[node name="PlatformSprite" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_olt5l")
+animation = &"fade_out"
+frame = 2
+frame_progress = 0.284972
+
+[node name="Area2D" type="StaticBody2D" parent="PlatformSprite"]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="PlatformSprite/Area2D"]
+position = Vector2(0, -1.5)
+shape = SubResource("RectangleShape2D_xufx4")
+
+[connection signal="animation_finished" from="PlatformSprite" to="." method="_on_platform_sprite_animation_finished"]
